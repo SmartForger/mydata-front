@@ -1,27 +1,44 @@
-import React, { Component } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
+
 import loading from '../assets/images/loading.svg'
 
-class Callback extends Component {
-  render() {
-    const style = {
+const Loading = ({ absolute }) => {
+  let style
+
+  if (absolute) {
+    style = {
+      backgroundColor: 'white',
       position: 'absolute',
       display: 'flex',
       justifyContent: 'center',
-      height: '100%',
       width: '100%',
-      top: 0,
-      bottom: 0,
+      height: '100%',
       left: 0,
+      top: 0,
       right: 0,
-      backgroundColor: 'white',
+      bottom: 0
     }
-
-    return (
-      <div style={style}>
-        <img src={loading} alt="loading"/>
-      </div>
-    )
+  } else {
+    style = {
+      display: 'flex',
+      justifyContent: 'center'
+    }
   }
+
+  return (
+    <div style={style}>
+      <img src={loading} alt="loading"/>
+    </div>
+  )
 }
 
-export default Callback
+Loading.propTypes = {
+  absolute: PropTypes.bool
+}
+
+Loading.defaultProps = {
+  absolute: false
+}
+
+export default Loading

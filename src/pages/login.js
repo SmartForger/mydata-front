@@ -1,11 +1,33 @@
 import React from 'react'
-import Loading from '../components/loading'
+import { withStyles } from '@material-ui/core'
 
-const LoginPage = () => (
-  <div>
-    <h1>Login 1</h1>
-    <Loading />
+import LoginForm from '../components/forms/login'
+
+const LoginPage = ({ classes }) => (
+  <div className={classes.root}>
+    <div className={classes.overlay} />
+    <LoginForm />
   </div>
 )
 
-export default LoginPage
+const styles = () => ({
+  root: {
+    height: '100vh',
+    backgroundImage: 'url("/assets/images/landscape-1.jpg")',
+    backgroundSize: 'cover',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  overlay: {
+    backgroundColor: 'rgba(0,0,0,0.64)',
+    width: '100%',
+    height: '100%',
+    position: 'absolute'
+  },
+  form: {
+    width: 400
+  }
+})
+
+export default withStyles(styles)(LoginPage)

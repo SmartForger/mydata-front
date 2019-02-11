@@ -1,44 +1,41 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { withStyles, CircularProgress } from '@material-ui/core';
 
-import loading from '../assets/images/loading.svg'
-
-const Loading = ({ absolute }) => {
-  let style
-
-  if (absolute) {
-    style = {
-      backgroundColor: 'white',
-      position: 'absolute',
-      display: 'flex',
-      justifyContent: 'center',
-      width: '100%',
-      height: '100%',
-      left: 0,
-      top: 0,
-      right: 0,
-      bottom: 0
-    }
-  } else {
-    style = {
-      display: 'flex',
-      justifyContent: 'center'
-    }
-  }
-
+const Loading = ({ absolute, classes, size }) => {
   return (
-    <div style={style}>
-      <img src={loading} alt="loading"/>
+    <div className={absolute ? classes.absolute : classes.relative}>
+      <CircularProgress size={size} />
     </div>
   )
 }
 
 Loading.propTypes = {
-  absolute: PropTypes.bool
+  absolute: PropTypes.bool,
+  size: PropTypes.number
 }
 
 Loading.defaultProps = {
-  absolute: false
+  absolute: false,
+  size: 40
 }
 
-export default Loading
+const styles = () => ({
+  relative: {
+    display: 'flex',
+    justifyContent: 'center'
+  },
+  absolute: {
+    background: 'white',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    left: 0,
+    top: 0
+  }
+})
+
+export default withStyles(styles)(Loading)

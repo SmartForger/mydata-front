@@ -5,6 +5,7 @@ import './App.scss'
 
 import history from './history'
 import LoginPage from './pages/login';
+import RegisterPage from './pages/register';
 import Error404 from './pages/error-404';
 
 class App extends Component {
@@ -14,6 +15,7 @@ class App extends Component {
         <Switch>
           <Route path="/" exact component={LoginPage} />
           <Route path="/login" component={LoginPage} />
+          <Route path="/register" component={RegisterPage} />
           <Route component={Error404} />
         </Switch>
       </Router>

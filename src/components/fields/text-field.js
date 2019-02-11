@@ -3,51 +3,31 @@ import PropTypes from 'prop-types'
 import { Field } from 'formik'
 import { TextField, withStyles } from '@material-ui/core'
 
-const CustomTextField = ({ classes, name, label }) => (
+const CustomTextField = ({ classes, name, ...inputProps }) => (
   <Field name={name}>
     {({ field, form: { touched, errors } }) => (
-      <div className={classes.root}>
-        <div className={classes.label}>{label}</div>
-        <div className={classes.control}>
-          <TextField
-            className={classes.textField}
-            {...field}
-            helperText={
-              touched[field.name] && errors[field.name] && (
-                <span className={classes.error}>{errors[field.name]}</span>
-              )
-            }
-          />
-        </div>
-      </div>
+      <TextField
+        className={classes.textField}
+        {...inputProps}
+        {...field}
+        helperText={
+          touched[field.name] && errors[field.name] && (
+            <span className={classes.error}>{errors[field.name]}</span>
+          )
+        }
+      />
     )}
   </Field>
 )
 
 CustomTextField.propTypes = {
-  name: PropTypes.string.isRequired,
-  label: PropTypes.string
-}
-
-CustomTextField.defaultProps = {
-  label: ''
+  name: PropTypes.string.isRequired
 }
 
 const styles = () => ({
-  root: {
-    display: 'flex',
-    marginBottom: 16
-  },
-  label: {
-    width: 120,
-    flex: 'none',
-    paddingTop: 7
-  },
-  control: {
-    flex: 1
-  },
   textField: {
-    width: '100%'
+    width: '100%',
+    marginBottom: 16
   },
   error: {
     color: 'red'
